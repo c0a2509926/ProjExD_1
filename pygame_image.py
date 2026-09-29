@@ -22,13 +22,15 @@ def main():
 
         key_lst = pg.key.get_pressed()#何のキーボードが何押しているか判断
         if key_lst[pg.K_UP]:
-            kt_rct.move_ip(0,-1)
+            kt_rct.move_ip(1,-1)
         if key_lst[pg.K_DOWN]:
-            kt_rct.move_ip(0,+1)
+            kt_rct.move_ip(1,+1)
         if key_lst[pg.K_LEFT]:
             kt_rct.move_ip(-1,0)
         if key_lst[pg.K_RIGHT]:
-            kt_rct.move_ip(+1,0)            
+            kt_rct.move_ip(+1,0)
+        else:
+            kt_rct.move_ip(-1,0)                
         x = tmr%3200 #練習⑨：ループさせる
         screen.blit(bg_img, [-x, 0])#背景の画像
         screen.blit(bg2_img, [-x+1600, 0])
