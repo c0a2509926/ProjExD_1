@@ -13,16 +13,27 @@ def main():
     kt_img = pg.image.load("fig/3.png")#こうかトントン画像サーフェイス
     kt_img = pg.transform.flip(kt_img, True, False)#左右逆転
     bg2_img = pg.transform.flip(bg_img, True, False)#左右逆転
+    kt_rct = kt_img.get_rect()#練習10-1
+    kt_rct.center = 300, 200#練習10-2    
     tmr = 0
     while True:
         for event in pg.event.get():
             if event.type == pg.QUIT: return
 
-        x = tmr%3200 
+        key_lst = pg.key.get_pressed()#何のキーボードが何押しているか判断
+        if key_lst[pg.K_UP]:
+            kt_rct.move_ip(0,-1)
+        if key_lst[pg.K_DOWN]:
+            kt_rct.move_ip(0,+1)
+        if key_lst[pg.K_LEFT]:
+            kt_rct.move_ip(-1,0)
+        if key_lst[pg.K_RIGHT]:
+            kt_rct.move_ip(+1,0)            
+        x = tmr%3200 #練習⑨：ループさせる
         screen.blit(bg_img, [-x, 0])#背景の画像
         screen.blit(bg2_img, [-x+1600, 0])
         screen.blit(bg_img, [-x+3200, 0])
-        screen.blit(kt_img, [300, 200])#こうかとんの出す位置のコマンド
+        screen.blit(kt_img, kt_rct)#こうかとんの出す位置のコマンド#10-5
         pg.display.update()
         tmr += 1   
         clock.tick(200)
